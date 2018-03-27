@@ -1,5 +1,5 @@
 /* 
- * This file contain the defination of the Adder adding a number to one.
+ * This file contain the definition of the Adder adding a number to one.
  * @date 03/26/2018
  * @author Harry Zhou
  * 

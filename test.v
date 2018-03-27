@@ -84,3 +84,27 @@ module ThirtytwobitCompressorTest;
 	
 endmodule
 
+//Constant test
+module ConstantTest;
+	
+	reg clk;
+	reg rst_n;
+	
+	initial begin
+		clk = 1;
+		rst_n = 1;
+	end
+	
+	always #5 clk=~clk;
+	
+	reg [5:0] address;
+	wire [31:0] value;
+	wire[31:0] init[0:7];
+	
+	K k(address, value);
+	InitialConstant inital({init[0],init[1],init[2],init[3],init[4],init[5],init[6],init[7]});
+	
+	initial address = 0;
+	always @(posedge clk) address = address + 1;
+	
+endmodule
