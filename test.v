@@ -56,3 +56,31 @@ module ThirtytwobitAdderTest;
 	end
 	
 endmodule
+
+//32-bit compressor test
+module ThirtytwobitCompressorTest;
+	
+	reg clk;
+	reg rst_n;
+	
+	initial begin
+		clk = 1;
+		rst_n = 1;
+	end
+	
+	always #5 clk=~clk;
+	
+	reg [31:0] A, B, C;
+	wire [31:0] Out1, Out2;
+	
+	ThirtytwobitCompressor compressor(A, B, C, Out1, Out2);
+	
+	initial begin
+		A=32'ha0ced587; B=32'haca69a1b; C=32'h81fdd47d;
+		#10 A=32'hd6f28b79; B=32'h449a9035; C=32'heea7f099;
+		#10 A=32'he2bb5641; B=32'h1e0049d5; C=32'hde5b547d;
+		#10 A=32'h04361d9c; B=32'h1023104d; C=32'h59843870;
+	end
+	
+endmodule
+
