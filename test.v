@@ -102,9 +102,44 @@ module ConstantTest;
 	wire[31:0] init[0:7];
 	
 	K k(address, value);
-	InitialConstant inital({init[0],init[1],init[2],init[3],init[4],init[5],init[6],init[7]});
+	InitialConstant initConst({init[0],init[1],init[2],init[3],init[4],init[5],init[6],init[7]});
 	
 	initial address = 0;
 	always @(posedge clk) address = address + 1;
+	
+endmodule
+
+//Generator module test
+module GeneratorTest;
+	
+	reg clk;
+	reg rst_n;
+	
+	initial begin
+		clk = 1;
+		rst_n = 0;
+		#19 rst_n = 1;
+	end
+	
+	always #5 clk=~clk;
+	
+	reg[6:0] counter;
+	reg[31:0] wordIn;
+	wire[31:0] Ain, Bin, Cin, Din, Ein, Fin, Gin, Hin;
+	wire[31:0] Aouta, Aoutb, Bout, Cout, Dout, Eout, Fout, Gout, Hout;
+	wire[31:0] Aout;
+	
+	assign Aout = Aouta+Aoutb;
+	
+	InitialConstant initConst({Ain, Bin, Cin, Din, Ein, Fin, Gin, Hin});
+	Generator generator(clk, rst_n, counter[5:0], wordIn, 
+		{Ain, Bin, Cin, Din, Ein, Fin, Gin, Hin}, 
+		{Aouta, Aoutb, Bout, Cout, Dout, Eout, Fout, Gout, Hout});
+	
+	always @(posedge clk) begin
+		counter <= (rst_n)?((counter != 7'd63)?(counter + 1):counter):7'd127;
+		#9 wordIn <= $urandom;
+	end
+	
 	
 endmodule
