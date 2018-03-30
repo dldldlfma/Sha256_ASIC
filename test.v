@@ -126,6 +126,7 @@ module GeneratorTest;
 	reg[6:0] counter;
 	reg[31:0] wordIn;
 	wire[31:0] Ain, Bin, Cin, Din, Ein, Fin, Gin, Hin;
+	wire ready;
 	wire[31:0] Aouta, Aoutb, Bout, Cout, Dout, Eout, Fout, Gout, Hout;
 	wire[31:0] Aout;
 	
@@ -133,7 +134,7 @@ module GeneratorTest;
 	
 	InitialConstant initConst({Ain, Bin, Cin, Din, Ein, Fin, Gin, Hin});
 	Generator generator(clk, rst_n, counter[5:0], wordIn, 
-		{Ain, Bin, Cin, Din, Ein, Fin, Gin, Hin}, 
+		{Ain, Bin, Cin, Din, Ein, Fin, Gin, Hin}, ready,
 		{Aouta, Aoutb, Bout, Cout, Dout, Eout, Fout, Gout, Hout});
 	
 	always @(posedge clk) begin
