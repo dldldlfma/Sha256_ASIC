@@ -173,3 +173,38 @@ module ParaToSerialTest;
 	end
 	
 endmodule
+
+//Sha256 module test
+module Sha256Test;
+	
+	reg clk;
+	reg rst_n;
+	
+	initial begin
+		clk = 1;
+		rst_n = 0;
+		#19 rst_n = 1;
+	end
+	
+	always #5 clk=~clk;
+	
+	reg calcu_en;
+	wire calcu_rdy;
+	reg read_en;
+	reg[31:0] wordIn;
+	wire[31:0] wordOut;
+	
+	Sha256 sha256(clk, rst_n, calcu_en, calcu_rdy, read_en, wordIn, wordOut);
+	
+	always @(posedge clk) #9 wordIn <= $urandom;
+	
+	initial begin
+		calcu_en = 1'b0;
+		read_en = 1'b0;
+		#29 calcu_en = 1'b1;
+		#10 calcu_en = 1'b0;
+		#680 read_en = 1'b1;
+		#10 read_en = 1'b0;
+	end
+	
+endmodule
