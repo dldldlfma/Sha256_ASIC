@@ -21,11 +21,14 @@ module Sha256(clk, rst_n, calcu_en, calcu_rdy, read_en, wordIn, wordOut);
 	reg[5:0] counter;
 	wire counterIsZero, counterIsFull;
 	wire genReady;
+	reg genReadyPrevious;
 	wire hashUpdate;
-	//Wire connection
+	//Counter judgement
 	assign counterIsZero = ~|counter[5:0];
 	assign counterIsFull = &counter[5:0];
-	assign hashUpdate = genReady;
+	//Generate hash update signal
+	always @(posedge clk) genReadyPrevious = genReady;
+	assign hashUpdate = genReady&(~genReadyPrevious);
 	//Counter update
 	always @(posedge clk) begin
 		counter <= (rst_n)?(

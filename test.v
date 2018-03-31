@@ -203,7 +203,9 @@ module Sha256Test;
 		read_en = 1'b0;
 		#29 calcu_en = 1'b1;
 		#10 calcu_en = 1'b0;
-		#680 read_en = 1'b1;
+		#660 calcu_en = 1'b1;
+		#10 calcu_en = 1'b0;
+		#660 read_en = 1'b1;
 		#10 read_en = 1'b0;
 	end
 	
