@@ -144,3 +144,32 @@ module GeneratorTest;
 	
 	
 endmodule
+
+//ParaToSerial module test
+module ParaToSerialTest;
+	
+	reg clk;
+	reg rst_n;
+	
+	initial begin
+		clk = 1;
+		rst_n = 0;
+		#19 rst_n = 1;
+	end
+	
+	always #5 clk=~clk;
+	
+	reg enable;
+	reg[255:0] in;
+	wire[31:0] out;
+	
+	ParaToSerial paratoserial(clk, rst_n, enable, in, out);
+	
+	initial begin
+		enable = 1'b0; 
+		in = {$urandom,$urandom,$urandom,$urandom,$urandom,$urandom,$urandom,$urandom};
+		#29 enable = 1'b1;
+		#10 enable = 1'b0;
+	end
+	
+endmodule
