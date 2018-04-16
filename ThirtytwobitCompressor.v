@@ -5,28 +5,7 @@
  * @author Harry Zhou
  * 
  */
-
-/*
- * This is the 1-bit compressor
- */
-module OnebitCompressor(A, B, C, Result, CarryOut);
-	
-	input A, B, C;
-	output Result, CarryOut;
-	
-	//In module definition
-	wire ABxor;
-	
-	//Basic Operations
-	assign ABxor = A^B;
-	assign Result = ABxor^C;
-	assign CarryOut = (A&B)|(C&ABxor);
-	
-endmodule
-
-/*
- * This is the 32-bit compressor
- */
+ 
 module ThirtytwobitCompressor(A, B, C, Out1, Out2);
 	
 	input[31:0] A, B, C;

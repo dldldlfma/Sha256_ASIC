@@ -77,7 +77,7 @@ module Sha256(clk, rst_n, calcu_en, calcu_rdy, read_en, wordIn, wordOut);
 		{Hash[0],Hash[1],Hash[2],Hash[3],Hash[4],Hash[5],Hash[6],Hash[7]}, wordOut);
 	
 	//Debug part
-	wire[31:0] A;
-	assign A = Aa+Ab;
+	/* wire[31:0] A;
+	assign A = Aa+Ab; */
 	
 endmodule
