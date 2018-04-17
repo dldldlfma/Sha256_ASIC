@@ -65,7 +65,7 @@ module Sha256(clk, rst_n, calcu_en, calcu_rdy, read_en, wordIn, wordOut);
 	ThirtytwobitAdder adder8(H, Hash[7], addout[7]);
 	//Hash value update
 	genvar i;
-	generate for (i=0; i<8; i=i+1) begin
+	generate for (i=0; i<8; i=i+1) begin : genHash
 		always @(posedge clk) 
 			Hash[i] <= (rst_n)?((hashUpdate)?addout[i]:Hash[i]):Hinit[i];
 	end endgenerate

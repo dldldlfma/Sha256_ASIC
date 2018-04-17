@@ -34,9 +34,9 @@ module Generator(clk, rst_n, counter, wordIn,
 	
 	//Word queue
 	genvar i;
-	generate for(i=0; i<15; i=i+1)
+	generate for(i=0; i<15; i=i+1) begin : genW
 		always @(posedge clk) W[i] <= (rst_n)?W[i+1]:32'h0;
-	endgenerate
+	end endgenerate
 	always @(posedge clk) W[15] <= (rst_n)?Win:32'h0;
 	//Wire connection
 	assign Wi_16 = W[0];

@@ -20,9 +20,9 @@ module ParaToSerial(clk, rst_n, enable, in, out);
 	
 	//Wire connection
 	genvar i;
-	generate for (i=0; i<8; i=i+1)
+	generate for (i=0; i<8; i=i+1) begin : genword
 		assign word[i] = in[32*(8-i)-1:32*(8-i-1)];
-	endgenerate
+	end endgenerate
 	assign isZero = ~|counter[2:0];
 	assign out = word[counter];
 	//counter update
